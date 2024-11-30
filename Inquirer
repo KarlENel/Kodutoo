@@ -1,61 +1,69 @@
-{
-  type: 'input',
-  name: 'name',
-  message: 'What is your name?'
-},
+const questions = [
+  {
+    type: 'input',
+    name: 'name',
+    message: 'What is your name?'
+  },
+  {
+    type: 'number',
+    name: 'age',
+    message: 'Enter your age:'
+  },
+  {
+    type: 'list',
+    name: 'gender',
+    message: 'What is your gender?',
+    choices: ['Male', 'Female', 'Prefer not to say']
+  },
+  {
+    type: 'rawlist',
+    name: 'pizza',
+    message: 'What size pizza do you want?',
+    choices: ['Large', 'Medium', 'Small']
+  },
+  {
+    type: 'expand',
+    name: 'fruit',
+    message: 'What is your favorite fruit?',
+    choices: [
+      { key: 'c', name: 'Cherry', value: 'cherry' },
+      { key: 'o', name: 'Orange', value: 'orange' },
+      { key: 'k', name: 'Kiwi', value: 'kiwi' },
+      { key: 'p', name: 'Pineapple', value: 'pineapple' },
+      { key: 'a', name: 'Apple', value: 'apple' }
+    ]
+  },
+  {
+    type: 'checkbox',
+    name: 'groceryList',
+    message: 'Grocery list:',
+    choices: ['Milk', 'Cheese', 'Ham', 'Bread']
+  },
+  {
+    type: 'confirm',
+    name: 'proceed',
+    message: 'Proceed?',
+    default: true
+  },
+  {
+    type: 'password',
+    name: 'oldPassword',
+    message: 'Old password:',
+    mask: '*',
+    validate: function (text) {
+      const originalPassword = "InquirerPy45@";
+      return text === originalPassword || 'Wrong password';
+    }
+  },
+  {
+    type: 'editor',
+    name: 'edit',
+    message: 'What will you edit?'
+  }
+];
 
-{
-  type: 'number',
-  name: 'age',
-  message: 'Enter your age:'
-},
+const inquirer = require('inquirer');
 
-{
-  type: 'list',
-  name: 'gender',
-  message: 'What is your gender?'
-  choices: ['Male', 'Female', 'Prefer not to say']
-},
-
-{
-  type: 'rawlist',
-  name: 'pizza',
-  message: 'What size pizza do you want?'
-  choices: ['Large', 'Medium', 'Small']
-},
-
-{
-  type: 'expand',
-  name: 'fruit',
-  message: 'What is your favorite fruit?'
-  choices: ['Cherry', 'Orange', 'Kiwi', 'Pineapple' 'Apple']
-},
-
-{
-  type: 'checkbox',
-  name: 'gender',
-  message: 'Grocery list'
-  choices: ['Milk', 'Cheese', 'Ham', 'Bread']
-},
-
-{
-  "type": "confirm",
-  "message": "Proceed?",
-  "name": "proceed",
-  "default": True,
-},
-
-{
-  "type": "password",
-  "message": "Old password:",
-  "transformer": lambda _: "[hidden]",
-  "validate": lambda text: text == original_password,
-  "invalid_message": "Wrong password",
-  "long_instruction": "Original password: InquirerPy45@",
-},
-
-{
-  type: 'editor',
-  name: 'edit',
-  message: 'What will you edit?'
-},
+inquirer.prompt(questions).then(answers => {
+  console.log('Answers:', answers);
+});
